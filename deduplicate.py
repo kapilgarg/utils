@@ -1,3 +1,9 @@
+"""
+This script identifies the deuplicate files from a given directory. 
+It recursively traverse the directory to list all the files. For each of the file, it computes the hash and identify the files with duplicate hash.
+it returns a pandas dataframe containing hash value and file path of duplicate files
+"""
+
 from tqdm import tqdm 
 import hashlib 
 import pathlib
