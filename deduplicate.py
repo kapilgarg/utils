@@ -2,6 +2,7 @@ from tqdm import tqdm
 import hashlib 
 import pathlib
 import pandas as pd
+import argparse
 
 block_size = 1024
 
@@ -33,6 +34,10 @@ def generate_hash(path):
     return (hashes, errors)
 
 if __name__ == '__main__':
-  hashes, errors = generate_hash(r"c:\temp")
-  df = pd.DataFrame(hashes, columns=["hash", "file"])
-  duplicated_df = df[df.duplicated(subset='hash', keep='first')]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('directory',help='directory containing the duplicate files')
+    args = parser.parse_args()
+    
+    hashes, errors = generate_hash(args.directory)
+    df = pd.DataFrame(hashes, columns=["hash", "file"])
+    duplicated_df = df[df.duplicated(subset='hash', keep='first')]
